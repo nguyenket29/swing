@@ -6,6 +6,7 @@
 package com.qlsv.cntt.View;
 
 import com.qlsv.cntt.Hepler.InforLogin;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,6 +18,9 @@ public class MenuForm extends javax.swing.JFrame {
     private SubjectsForm subjectsForm;
     private ClassForm classForm;
     private CoreForm core;
+    private KhoaForm khoaForm;
+    private ChangePasswordForm changeForm;
+    private RegisterAccountForm accForm;
 
     /**
      * Creates new form Menu
@@ -35,6 +39,7 @@ public class MenuForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem2 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         tblPane = new javax.swing.JTabbedPane();
@@ -58,6 +63,12 @@ public class MenuForm extends javax.swing.JFrame {
         jmnKhoa = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
         jmnLop = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jmnChangePass = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        jmnRegister = new javax.swing.JMenuItem();
+
+        jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -94,6 +105,11 @@ public class MenuForm extends javax.swing.JFrame {
         txtRole.setEnabled(false);
 
         jButton1.setText("Đăng xuất");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Đăng Nhập: ");
 
@@ -101,11 +117,21 @@ public class MenuForm extends javax.swing.JFrame {
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         jMenuItem1.setText("Thoát");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
         jMenu1.add(jSeparator2);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jMenuItem4.setText("Đăng xuất");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem4);
 
         jMenuBar.add(jMenu1);
@@ -162,6 +188,29 @@ public class MenuForm extends javax.swing.JFrame {
         jMenu2.add(jmnLop);
 
         jMenuBar.add(jMenu2);
+
+        jMenu3.setText("Trợ giúp");
+
+        jmnChangePass.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jmnChangePass.setText("Đổi mật khẩu");
+        jmnChangePass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmnChangePassActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jmnChangePass);
+        jMenu3.add(jSeparator6);
+
+        jmnRegister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jmnRegister.setText("Đăng ký tài khoản sinh viên");
+        jmnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmnRegisterActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jmnRegister);
+
+        jMenuBar.add(jMenu3);
 
         setJMenuBar(jMenuBar);
 
@@ -224,10 +273,9 @@ public class MenuForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jmnStudentActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        if (InforLogin.taiKhoan.getVaiTro().equals("Giảng viên")) {
-            jmnStudent.setEnabled(false);
-        } else if (InforLogin.taiKhoan.getVaiTro().equals("Sinh viên")) {
-            jmnStudent.setEnabled(true);
+        if(InforLogin.taiKhoan.getVaiTro().equals("Sinh Viên")){
+            jmnRegister.setEnabled(false);
+            jmnChangePass.setEnabled(false);
         }
         processLogin();
     }//GEN-LAST:event_formWindowOpened
@@ -249,22 +297,54 @@ public class MenuForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jmnLopActionPerformed
 
     private void jmnKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmnKhoaActionPerformed
-        // TODO add your handling code here:
+        if(khoaForm == null){
+            khoaForm = new KhoaForm();
+            tblPane.add("Quản lý khoa", khoaForm);
+        }
+        tblPane.setSelectedComponent(khoaForm);
     }//GEN-LAST:event_jmnKhoaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int choose = JOptionPane.showConfirmDialog(form, "Đăng xuất ?");
+        if(choose == JOptionPane.YES_OPTION){
+            dispose();
+            LoginForm login = new LoginForm();
+            login.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jmnChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmnChangePassActionPerformed
+         if(changeForm == null){
+            changeForm = new ChangePasswordForm();
+            tblPane.add("Đổi mật khẩu", changeForm);
+        }
+        tblPane.setSelectedComponent(changeForm);
+    }//GEN-LAST:event_jmnChangePassActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        int choose = JOptionPane.showConfirmDialog(form, "Đăng xuất ?");
+        if(choose == JOptionPane.YES_OPTION){
+            dispose();
+            LoginForm login = new LoginForm();
+            login.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jmnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmnRegisterActionPerformed
+        if(accForm == null){
+            accForm = new RegisterAccountForm();
+            tblPane.add("Đổi mật khẩu", accForm);
+        }
+        tblPane.setSelectedComponent(accForm);
+    }//GEN-LAST:event_jmnRegisterActionPerformed
 
     private void processLogin() {
         txtNameLogin.setText(InforLogin.taiKhoan.getTaiKhoan());
         txtRole.setText(InforLogin.taiKhoan.getVaiTro());
-        if(txtRole.getText().equals("Giảng Viên")){
-            jmnStudent.setEnabled(false);
-        }else {
-            jmnCore.setEnabled(false);
-            jmnStudent.setEnabled(true);
-            jmnLop.setEnabled(false);
-            jmnKhoa.setEnabled(false);
-            jmnMon.setEnabled(false);
-        }
-        
     }
 
     /**
@@ -310,8 +390,10 @@ public class MenuForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
@@ -319,10 +401,13 @@ public class MenuForm extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JMenuItem jmnChangePass;
     private javax.swing.JMenuItem jmnCore;
     private javax.swing.JMenuItem jmnKhoa;
     private javax.swing.JMenuItem jmnLop;
     private javax.swing.JMenuItem jmnMon;
+    private javax.swing.JMenuItem jmnRegister;
     private javax.swing.JMenuItem jmnStudent;
     private javax.swing.JTabbedPane tblPane;
     private javax.swing.JTextField txtNameLogin;

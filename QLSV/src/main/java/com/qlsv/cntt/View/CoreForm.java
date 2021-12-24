@@ -7,6 +7,7 @@ package com.qlsv.cntt.View;
 
 import com.qlsv.cntt.Controller.ConnectDB;
 import com.qlsv.cntt.Dao.CoreDAO;
+import com.qlsv.cntt.Hepler.InforLogin;
 import com.qlsv.cntt.Hepler.MesageHepler;
 import com.qlsv.cntt.Hepler.Validator;
 import com.qlsv.cntt.model.Core;
@@ -44,7 +45,11 @@ public class CoreForm extends javax.swing.JPanel {
      */
     public CoreForm() {
         initComponents();
-
+        if(InforLogin.taiKhoan.getVaiTro().equals("Sinh Viên")){
+            btnLuu.setEnabled(false);
+            btnXoa.setEnabled(false);
+        }
+        
         initComboboxKhoa();
         initComboboxLop();
         initComboboxMon();

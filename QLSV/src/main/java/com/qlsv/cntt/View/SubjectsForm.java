@@ -7,6 +7,7 @@ package com.qlsv.cntt.View;
 
 import com.qlsv.cntt.Controller.ConnectDB;
 import com.qlsv.cntt.Dao.SubjectsDAO;
+import com.qlsv.cntt.Hepler.InforLogin;
 import com.qlsv.cntt.Hepler.MesageHepler;
 import com.qlsv.cntt.Hepler.Validator;
 import com.qlsv.cntt.model.Subjects;
@@ -34,6 +35,11 @@ public class SubjectsForm extends javax.swing.JPanel {
      */
     public SubjectsForm() {
         initComponents();
+        if(InforLogin.taiKhoan.getVaiTro().equals("Sinh Viên")){
+            btnSua.setEnabled(false);
+            btnXoa.setEnabled(false);
+            btnThem.setEnabled(false);
+        }
         initTable();
         showAll();
     }

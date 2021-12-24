@@ -8,11 +8,14 @@ package com.qlsv.cntt.View;
 import com.qlsv.cntt.Controller.ConnectDB;
 import com.qlsv.cntt.Dao.StudentDAO;
 import com.qlsv.cntt.Hepler.ImgHelpler;
+import com.qlsv.cntt.Hepler.InforLogin;
 import com.qlsv.cntt.Hepler.MesageHepler;
 import com.qlsv.cntt.Hepler.Validator;
 import com.qlsv.cntt.model.Student;
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,6 +30,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.CellRendererPane;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -55,7 +59,13 @@ public class SVForm extends javax.swing.JPanel {
      */
     public SVForm() {
         initComponents();
-
+        if(InforLogin.taiKhoan.getVaiTro().equals("Sinh Viên")){
+            btnChinhSua.setEnabled(false);
+            btnXoa.setEnabled(false);
+            btnLuu.setEnabled(false);
+            btnOpenImg.setEnabled(false);
+        }
+        
         initTable();
         initCombobox();
         showAll();
@@ -560,7 +570,7 @@ public class SVForm extends javax.swing.JPanel {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileFilter(new FileFilter() {
             @Override
-            public boolean accept(File file) {
+        public boolean accept(File file) {
                 if (file.isDirectory()) {
                     return true;
                 } else {
@@ -569,7 +579,7 @@ public class SVForm extends javax.swing.JPanel {
             }
 
             @Override
-            public String getDescription() {
+        public String getDescription() {
                 return "Image file .jpg";
             }
         });

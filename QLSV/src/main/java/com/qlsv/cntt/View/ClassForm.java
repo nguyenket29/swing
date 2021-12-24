@@ -8,10 +8,10 @@ package com.qlsv.cntt.View;
 import com.qlsv.cntt.Controller.ConnectDB;
 import com.qlsv.cntt.Dao.CLassDAO;
 import com.qlsv.cntt.Dao.SubjectsDAO;
+import com.qlsv.cntt.Hepler.InforLogin;
 import com.qlsv.cntt.Hepler.MesageHepler;
 import com.qlsv.cntt.Hepler.Validator;
 import com.qlsv.cntt.model.Lop;
-import com.qlsv.cntt.model.Subjects;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,6 +36,11 @@ public class ClassForm extends javax.swing.JPanel {
      */
     public ClassForm() {
         initComponents();
+        if(InforLogin.taiKhoan.getVaiTro().equals("Sinh Viên")){
+            btnSua.setEnabled(false);
+            btnXoa.setEnabled(false);
+            btnThem.setEnabled(false);
+        }
         initTable();
         showAll();
     }
